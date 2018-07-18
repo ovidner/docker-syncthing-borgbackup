@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eufo pipefail
+
+exec syncthing -home $HOME/.stconfig -gui-address 0.0.0.0:8384

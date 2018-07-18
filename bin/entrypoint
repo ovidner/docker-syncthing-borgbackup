@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eufo pipefail
+
+USER_ID=${USER_ID:-1000}
+USER_NAME=${USER_NAME:-user}
+export HOME=/home/${USER_NAME}
+
+CYAN_BOLD='\e[1;36m'
+NF='\e[0m'
+
+printf "${CYAN_BOLD}Running as UID ${USER_ID}(${USER_NAME})…${NF}\n"
+adduser -D -h ${HOME} -s /bin/sh -u ${USER_ID} ${USER_NAME}
+
+exec su-exec ${USER_NAME} "${@}"
