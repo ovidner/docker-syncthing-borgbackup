@@ -10,5 +10,8 @@ RUN apk add --no-cache borgbackup su-exec syncthing
 
 COPY . ${APP_ROOT}/
 
+EXPOSE 8384 22000 21027/udp
+HEALTHCHECK --interval=1m --timeout=10s \
+  CMD nc -z localhost 8384 || exit 1
 ENTRYPOINT ["entrypoint"]
 CMD ["run-syncthing"]
